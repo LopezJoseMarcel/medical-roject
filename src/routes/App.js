@@ -1,10 +1,10 @@
-import './styles/App.css';
+import '../styles/App.css';
 import React from 'react';
 import { useState } from 'react';
-import Login from './components/Login';
-import Register from './components/Register';
-import Calendar from './components/Calendar';
-import Appointment from './components/Appointment';
+//import Login from '../components/Login';
+//import Register from '../components/Register';
+import Calendar from '../components/Calendar';
+import Appointment from '../components/Appointment';
 
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
  //end form
 
  //Calendar
-   const [currentViewCalendar, setCurrentViewCalendar] = useState('');
+   const [currentViewCalendar, setCurrentViewCalendar] = useState('calendar');
 
    const changeView  = (view) => {
      setCurrentViewCalendar(view);
@@ -26,17 +26,19 @@ function App() {
  
   return (
     
-    <div className="App">
+    /*<div className="App">
       {
         currentForm === "login" ? <Login onFormSwitch={toggleForm} /> : <Register onFormSwitch={toggleForm}/>
       }
-    </div>
-    /*
+    </div>*/
+     
     <div className="App">
        {
-         currentViewCalendar === 'appointment' ? <Appointment /> : <Calendar changeView={changeView}/> 
+         currentViewCalendar === 'appointment' ? <Appointment changeView={changeView} /> : <Calendar changeView={changeView}/> 
        } 
-    </div>*/
+    </div>
+     
+    
   );
 }
 
