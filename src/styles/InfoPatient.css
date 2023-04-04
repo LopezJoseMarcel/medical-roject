@@ -1,0 +1,15 @@
+body {
+    background: linear-gradient(270deg, #83EAF1 -4.98%, #63A4FF 104%);
+
+  }
+  *{
+    margin: 0;
+    padding: 0; /*This is using to clear css default properties*/
+    font-family: Lato, sans-serif;
+  }
+
+  .super-container {
+   display: flex;
+   flex-direction: row;
+   gap: 12px;
+  }

@@ -1,0 +1,26 @@
+*{
+    font-family: Lato, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  h4 {
+    color: #047CFE;
+  }
+
+  .next-appoitment {
+    background: white;
+    width: 250px;
+    min-height: 150px;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .appoitment-info {
+    margin: 10px; 
+  }
+
+  .appoitment-info > span {
+    font-size: 12pt;
+    color: grey;
+  }
