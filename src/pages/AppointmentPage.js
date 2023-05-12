@@ -19,6 +19,7 @@ const AppointmentPage = () => {
         <div className="main-container">
           <div className="first-column">
             <NextAppointment/>
+            <h3>Seleccione un horario para una cita</h3>
             {
               currentViewCalendar === 'appointment' ? <Appointment changeView={changeView} /> : <Calendar changeView={changeView}/> 
             } 

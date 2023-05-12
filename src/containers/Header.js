@@ -4,6 +4,7 @@ import Menu from '../components/Menu';
 import { AiOutlineMenu } from "react-icons/ai";
 import MenuRespond from '../components/MenuRespond';
 import logo from '../assets/logoDR.svg';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   //Toggle Menu 
@@ -27,16 +28,19 @@ const Header = () => {
      <nav>
     <AiOutlineMenu size={'50px'} className='menu' onClick={handleToggleMenuRespond}/>
    <div className="navbar-left">
-    <img src={logo} alt="logoDR" className="logo" />
+    <Link to="/">
+      <img src={logo} alt="logoDR" className="logo" />
+    </Link>
+    
     <ul>
       <li>
-        <a href="/">Mi información Médica</a>
+        <Link to="/info-patient">Mi información Médica</Link>
       </li>
       <li>  
-        <a href="/">Citas Médicas</a>
+        <Link to="/appointment-page">Citas Médicas</Link>
       </li>
       <li>
-        <a href="/">Contactanos</a>
+        <Link to="/doctor-page">Consulta</Link>
       </li>
       <li>
         <a href="/">Quienes somos</a>

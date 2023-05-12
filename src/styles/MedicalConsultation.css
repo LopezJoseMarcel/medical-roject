@@ -1,0 +1,95 @@
+*{
+    font-family: Lato, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .clinic-container{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background: white;
+    margin: 10px;
+    padding: 20px;
+    gap: 12px;
+    width: 790px;
+  }
+  input {
+    border: none;
+    border-radius: 8px;
+    font-weight: bolder;
+    color: black;
+    background-color: #D8EAFE;
+    height: 1.5rem;
+    padding: 0 0.5rem 0 0.5rem;
+    margin-bottom: 10px;
+    
+  }
+
+  label{
+    color: #047CFE;
+    font-weight: bolder;
+  }
+  button {
+    margin-top: 10px;
+  }
+  
+  .boton-cabecera {
+    
+    border: none;
+    background: #047CFE;
+    padding: 8px;
+    border-radius: 21px;
+    color: white;
+}
+
+  .Consulta-cabecera{
+    display: flex;
+    flex-direction: column;
+    width: 404px;
+    gap: 10px;
+    
+}
+
+examen-fisico-container {
+  display: contents;
+}
+
+.ckb-Diagnostico{
+  margin:0
+  
+}
+
+.tratamiento-container {
+    display: grid;
+    grid-template-columns: 300px 300px;
+}
+
+h3{
+  color: yellowgreen;
+}
+
+.anhadir {
+    border: none;
+    background: #047CFE;
+    padding: 8px;
+    border-radius: 21px;
+    color: white;
+}
+
+.opciones{
+  display: flex;
+  flex-direction:row;
+  justify-content: center;
+  gap: 100px
+}
+
+.opciones > button{
+  border: none;
+    background: yellowgreen;
+    padding: 8px;
+    border-radius: 21px;
+    color: white;
+    width: 100px;
+
+}

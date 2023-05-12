@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import '../styles/Loging.css';
 
 const Login = (props) => {
    //using hook to handle the email state

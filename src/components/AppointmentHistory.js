@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import '../styles/DiseaseTreatment.css'
+import '../styles/AppoitmentHistory.css'
 
 function createData(id, date, schedule,disease) {
   return { id, date, schedule, disease};
@@ -14,7 +14,7 @@ function createData(id, date, schedule,disease) {
 
 const rows = [
   createData(1 ,'Lunes 03-04-2023', '16:30', 'Covid'),
-  createData(1 ,'Viernes 31-03-2023', '18:30', 'Gastritis') 
+  createData(2 ,'Viernes 31-03-2023', '18:30', 'Gastritis') 
 ];
 
 export default function AppointmentHistory() {
