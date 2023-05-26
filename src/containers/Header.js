@@ -5,6 +5,7 @@ import { AiOutlineMenu } from "react-icons/ai";
 import MenuRespond from '../components/MenuRespond';
 import logo from '../assets/logoDR.svg';
 import { Link } from 'react-router-dom';
+import useUser from '../hooks/useUser';
 
 const Header = () => {
   //Toggle Menu 
@@ -22,6 +23,15 @@ const Header = () => {
      setToggleMenuRespond(!toggleMenuRespond);
    }
    //end toggle menu
+
+  // const isLoggedIn = false
+  const {isLoggedIn,logout} = useUser()
+
+  //evitar la navegacion del logout
+  const handleClick = (e) => {
+    e.preventDefault();
+    logout();
+  }
 
   return(
     <>
@@ -49,9 +59,35 @@ const Header = () => {
    </div>
    <div className="navbar-right">
     <ul>
-      <li className="navbar-email" onClick={handleToggleMenu}>
-        lolososi@example.com
+     
+        
+      <li className='navbar-email'>
+        {
+          isLoggedIn 
+          ? <Link to='/info-patient'>
+            example@gmail.com
+           </Link>
+          : 
+          <span>
+            No ha iniciado sesion
+          </span>
+        }
+        
       </li>
+      
+      
+      <li className="navbar-email" onClick={handleToggleMenu}>
+        {
+          isLoggedIn 
+          ? <Link to='/' onClick={handleClick}>
+            Logout
+           </Link>
+          : <Link to='/forms'>
+             Login
+            </Link>
+        }
+      </li>
+      
       
     </ul>
   </div>

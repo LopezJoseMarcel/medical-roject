@@ -1,17 +1,32 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"
 import '../styles/Loging.css';
+import useUser from "../hooks/useUser";
 
 const Login = (props) => {
    //using hook to handle the email state
    const [email, setEmail] = useState('');
-   const [password, setPassword] = useState('');
+   const [contrasenha, setcontrasenha] = useState('');
+   //const to navigate 
+   const navigate = useNavigate();
+   //hooks
+   const {login, isLoggedIn} = useUser();
+
+   //useEffect for when user is logged, it navigate to "/"
+   useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+   },[isLoggedIn]) //This should changes when isLoggedIn Changed
 
    const handleSubmit = (e) =>{
      e.preventDefault();  
 
      console.log(email);
-     console.log(password);
+     console.log(contrasenha);
+
+     login(email, contrasenha);
    }
 
     return(
@@ -24,10 +39,10 @@ const Login = (props) => {
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <label htmlFor="input-password" >Contraseña</label>
-          <input value={password} name="password" id="input-password" 
-            type="password" placeholder=""
-            onChange={(e) => setPassword(e.target.value)}
+          <label htmlFor="input-contrasenha" >Contraseña</label>
+          <input value={contrasenha} name="contrasenha" id="input-contrasenha" 
+            type="contrasenha" placeholder=""
+            onChange={(e) => setcontrasenha(e.target.value)}
           />
           <button  type="submit" className="button-form">Iniciar</button>
         </form>

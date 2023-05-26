@@ -7,6 +7,7 @@ import Forms from '../src/pages/Forms';
 import Home from '../src/pages/Home';
 import InfoPatient from '../src/pages/InfoPatient';
 import Header from './containers/Header';
+import { UserContextProvider } from './context/UserContext'
 
 function App() {
  
@@ -15,14 +16,16 @@ function App() {
     
     
     <div className='App'>
+      <UserContextProvider>
+        <Routes>
+          <Route path='/' element={ <Home/> }/>
+          <Route path='/forms' element={ <Forms/> }/>
+          <Route path='/appointment-page' element={ <AppointmentPage/> }/>
+          <Route path='/doctor-page' element={ <DoctorPage/> }/>
+          <Route path='/info-patient' element={ <InfoPatient/> }/>
+          </Routes>
+      </UserContextProvider>
       
-      <Routes>
-        <Route path='/' element={ <Home/> }/>
-        <Route path='/forms' element={ <Forms/> }/>
-        <Route path='/appointment-page' element={ <AppointmentPage/> }/>
-        <Route path='/doctor-page' element={ <DoctorPage/> }/>
-        <Route path='/info-patient' element={ <InfoPatient/> }/>
-      </Routes>
       
    </div>
     
