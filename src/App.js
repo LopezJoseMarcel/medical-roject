@@ -7,7 +7,9 @@ import Forms from '../src/pages/Forms';
 import Home from '../src/pages/Home';
 import InfoPatient from '../src/pages/InfoPatient';
 import Header from './containers/Header';
+import FormData from './components/FormData'
 import { UserContextProvider } from './context/UserContext'
+
 
 function App() {
  
@@ -23,6 +25,7 @@ function App() {
           <Route path='/appointment-page' element={ <AppointmentPage/> }/>
           <Route path='/doctor-page' element={ <DoctorPage/> }/>
           <Route path='/info-patient' element={ <InfoPatient/> }/>
+          <Route path='/form-data' element={ <FormData/> }/>
           </Routes>
       </UserContextProvider>
       

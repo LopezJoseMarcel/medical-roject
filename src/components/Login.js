@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
 import '../styles/Loging.css';
 import useUser from "../hooks/useUser";
+import { Box, CircularProgress } from "@mui/material";
+
 
 const Login = (props) => {
    //using hook to handle the email state
@@ -11,14 +13,14 @@ const Login = (props) => {
    //const to navigate 
    const navigate = useNavigate();
    //hooks
-   const {login, isLoggedIn} = useUser();
+   const {isLoginLoading, isLogingError,login, isLoggedIn} = useUser();
 
    //useEffect for when user is logged, it navigate to "/"
    useEffect(() => {
     if (isLoggedIn) {
-      navigate("/");
+      navigate('/');
     }
-   },[isLoggedIn]) //This should changes when isLoggedIn Changed
+   },[isLoggedIn, navigate]) //This should changes when isLoggedIn Changed
 
    const handleSubmit = (e) =>{
      e.preventDefault();  
@@ -32,6 +34,8 @@ const Login = (props) => {
     return(
        <div className="max-container">
         <h2>Login</h2>
+        {!isLoginLoading &&
+        <>
         <form className="login-form" onSubmit={handleSubmit}>
           <label  htmlFor="input-email" >Correo</label>
           <input value={email} name="email" type="email"
@@ -49,6 +53,18 @@ const Login = (props) => {
         <button className="link-btn" onClick={() => props.onFormSwitch('register')}>
           No tengo una cuenta? Registrece aqui.
         </button>
+        </>
+        }
+        {
+          isLoginLoading &&
+          <Box sx={{ display: 'flex' }}>
+          <CircularProgress />
+          </Box> 
+        }
+        {
+          isLogingError && <strong>Credenciales Invalidas</strong>
+        }
+        
        </div> 
         
        

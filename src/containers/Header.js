@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useContext, useState} from 'react';
 import '../styles/Header.css';
 import Menu from '../components/Menu';
 import { AiOutlineMenu } from "react-icons/ai";
@@ -6,6 +6,7 @@ import MenuRespond from '../components/MenuRespond';
 import logo from '../assets/logoDR.svg';
 import { Link } from 'react-router-dom';
 import useUser from '../hooks/useUser';
+import Context from '../context/UserContext';
 
 const Header = () => {
   //Toggle Menu 
@@ -26,6 +27,7 @@ const Header = () => {
 
   // const isLoggedIn = false
   const {isLoggedIn,logout} = useUser()
+  const { userInfo } = useContext(Context);
 
   //evitar la navegacion del logout
   const handleClick = (e) => {
@@ -65,7 +67,7 @@ const Header = () => {
         {
           isLoggedIn 
           ? <Link to='/info-patient'>
-            example@gmail.com
+            {userInfo?.email}
            </Link>
           : 
           <span>

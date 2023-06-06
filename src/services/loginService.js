@@ -14,7 +14,7 @@ export default function loginService ({email, contrasenha}){
     if (!res.ok) throw new Error('Response is not ok!!')
     return res.json()
   }).then(res => {
-    const {jwt} = res.jwt
+    const jwt = res.jwt
     return jwt
   })
 }
