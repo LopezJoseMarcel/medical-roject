@@ -5,7 +5,7 @@ import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { es } from 'date-fns/locale';
 import '../styles/Calendar.css';
 import { useState } from 'react';
-//import Appointment from './Appointment';
+
 
 const Calendar = (props) => {
    const [dateValue, setDateValue] = useState(new Date());
