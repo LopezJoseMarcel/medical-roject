@@ -10,6 +10,7 @@ import '../styles/DiseaseTreatment.css';
 import tratamientoEnfermedadService from '../services/tratamientoEnfermedadService';
 import Context from '../context/UserContext';
 
+
 export default function DiseaseTreatment() {
   const [tratamientos, setTratamientos] = useState([]);
   const { userInfo } = useContext(Context);

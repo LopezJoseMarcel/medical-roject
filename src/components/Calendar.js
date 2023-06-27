@@ -1,32 +1,28 @@
+// Calendar.js
 import React from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { es } from 'date-fns/locale';
 import '../styles/Calendar.css';
-import { useState } from 'react';
-
 
 const Calendar = (props) => {
-   const [dateValue, setDateValue] = useState(new Date());
+  const handleDateChange = (date) => {
+    props.onFechaSeleccionada(date);
+  };
 
-  console.log(dateValue);
-
-    return(
-    <div className='container-calendar' >
+  return (
+    <div className='container-calendar'>
       <LocalizationProvider locale={es} dateAdapter={AdapterDateFns}>
         <StaticDatePicker
           className='datePicker'
-          disablePast={true} 
-          value={dateValue}
-          onChange={setDateValue}
-          onAccept={() => props.changeView('appointment')}
+          disablePast={true}
+          value={props.fechaSeleccionada}
+          onChange={handleDateChange}
         />
-      </LocalizationProvider>   
-    </div>    
-    
-    );
+      </LocalizationProvider>
+    </div>
+  );
 };
 
 export default Calendar;
-

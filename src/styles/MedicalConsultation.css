@@ -76,6 +76,9 @@ h3{
     border-radius: 21px;
     color: white;
 }
+.anhadir:hover{
+  background: yellowgreen;
+}
 
 .opciones{
   display: flex;
@@ -92,4 +95,37 @@ h3{
     color: white;
     width: 100px;
 
+}
+
+.opciones > button:hover{
+  background:#047CFE;
+}
+
+.lesiones-container{
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+#container-enfermedadComponent{
+  margin: 10px;
+}
+
+#autocomplete-container{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.container-inputs{
+  display: flex;
+  margin-top: 28px;
+  gap: 12px;
+  flex-direction: column;
+}
+
+#accordion{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }

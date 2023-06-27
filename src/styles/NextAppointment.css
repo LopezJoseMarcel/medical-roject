@@ -18,9 +18,18 @@
 
   .appoitment-info {
     margin: 10px; 
+    background: white;
+    background-color: white;
   }
 
   .appoitment-info > span {
     font-size: 12pt;
-    color: grey;
+    color: black;
+    background-color: azure;
+  }
+
+  #next-appointment{
+    background: white;
+    padding: 12px;
+    border-radius: 14px;
   }
