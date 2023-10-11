@@ -8,6 +8,8 @@ import Typography from '@mui/material/Typography';
 import CloseSharpIcon from '@mui/icons-material/CloseSharp';
 import Slide from '@mui/material/Slide';
 import InsertForm from './InsertForm';
+//import createModel_info from "../services/createModel_info";
+import allEnferService from '../services/allEnferService';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -15,6 +17,22 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function EnfermedadComponent({ handleGuardar }) {
   const [open, setOpen] = React.useState(false);
+
+  const [enfermedades, setEnfermedades] = React.useState([])
+
+  const fetchEnfermedadesInsert = async () => {
+    try {
+      const response = await allEnferService();
+      setEnfermedades(response);
+
+      if (!response) {
+        throw new Error('error en allEnferService')
+      }
+
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -27,12 +45,13 @@ export default function EnfermedadComponent({ handleGuardar }) {
   const handleGuardarClick = () => {
     handleGuardar(); // Llama a la función handleGuardar de MedicalConsultation
     handleClose();
+    fetchEnfermedadesInsert();
   };
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Agregar Enfermedad
+      <Button  variant="contained" onClick={handleClickOpen}>
+        Agregar Nueva Enfermedad
       </Button>
       <Dialog
         fullScreen

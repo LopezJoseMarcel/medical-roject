@@ -9,7 +9,7 @@ import InfoPatient from '../src/pages/InfoPatient';
 import Header from './containers/Header';
 import FormData from './components/FormData'
 import { UserContextProvider } from './context/UserContext'
-
+import DiseasesTrain from './pages/DiseasesTrain';
 
 function App() {
  
@@ -26,6 +26,7 @@ function App() {
           <Route path='/doctor-page' element={ <DoctorPage/> }/>
           <Route path='/info-patient' element={ <InfoPatient/> }/>
           <Route path='/form-data' element={ <FormData/> }/>
+          <Route path='/disease-train' element={ <DiseasesTrain/> }/>
           </Routes>
       </UserContextProvider>
       

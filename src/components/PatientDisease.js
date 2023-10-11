@@ -18,6 +18,8 @@ const PatientDisease = () => {
         setDiagnosis(diagnoses);
       } catch (error) {
         console.error(error.message);
+        const diagnoses = [];
+        setDiagnosis(diagnoses);
       }
     };
 
@@ -30,6 +32,8 @@ const PatientDisease = () => {
           setDiagnosisPresunt(diagnoses);
         } catch (error) {
           console.error(error.message);
+          const diagnoses = [];
+          setDiagnosis(diagnoses);
         }
       };
 
@@ -39,27 +43,31 @@ const PatientDisease = () => {
 
   return (
     <div className="chronic-disease">
-      <h3>Diagnóstico presuntivo</h3>
-      <div className="disease-info">
-        <ul>
-        {diagnosisPresunt.length > 0 ? (
-            diagnosisPresunt.map((item, index) => <li key={index}>{item.nombre}</li>)
-          ) : (
-            <li>No data</li>
-          )}
-        </ul>
-      </div>
-      <h3>Diagnóstico definitivo</h3>
-      <div className="disease-info">
-        <ul>
-          {diagnosis.length > 0 ? (
-            diagnosis.map((item, index) => <li key={index}>{item.nombre}</li>)
-          ) : (
-            <li>No data</li>
-          )}
-        </ul>
-      </div>
-    </div>
+  <h3>Diagnóstico presuntivo</h3>
+  <div className="disease-info">
+    <ul>
+      {diagnosisPresunt.length > 0 ? (
+        diagnosisPresunt.map((item, index) => (
+          <li key={index}>{item && item.nombre ? item.nombre : "No data"}</li>
+        ))
+      ) : (
+        <li>No data</li>
+      )}
+    </ul>
+  </div>
+  <h3>Diagnóstico definitivo</h3>
+  <div className="disease-info">
+    <ul>
+      {diagnosis.length > 0 ? (
+        diagnosis.map((item, index) => (
+          <li key={index}>{item && item.nombre ? item.nombre : "No data"}</li>
+        ))
+      ) : (
+        <li>No data</li>
+      )}
+    </ul>
+  </div>
+</div>
   );
 };
 

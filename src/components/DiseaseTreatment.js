@@ -31,19 +31,19 @@ export default function DiseaseTreatment() {
   }, []);
 
   return (
-    <div className='full-container'>
+    <div id='full-container'>
       <h3 className='table-title'>Tratamiento Activo</h3>
       <TableContainer className='table' component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table sx={{ minWidth: 600}} aria-label="simple table" size='small'>
           <TableHead>
             <TableRow>
               
-              <TableCell align="right">Forma de aplicación</TableCell>
-              <TableCell align="right">Medicamento</TableCell>
-              <TableCell align="right">Presentación&nbsp;(g)</TableCell>
-              <TableCell align="right">Cantidad &nbsp;(n)</TableCell>
-              <TableCell align="right">Frecuencia diaria&nbsp;(hs)</TableCell>
-              <TableCell align="right">Tiempo de tratamiento&nbsp;(dias)</TableCell>
+              <TableCell id='table-rows'  align="left">Forma de aplicación</TableCell>
+              <TableCell id='table-rows' align="left">Medicamento</TableCell>
+              <TableCell id='table-rows' align="left">Presentación&nbsp;(g)</TableCell>
+              <TableCell id='table-rows' align="left">Cantidad &nbsp;(n)</TableCell>
+              <TableCell id='table-rows' align="left">Frecuencia diaria&nbsp;(hs)</TableCell>
+              <TableCell id='table-rows' align="left">Tiempo de tratamiento&nbsp;(dias)</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -54,12 +54,12 @@ export default function DiseaseTreatment() {
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   
-                  <TableCell align="right">{row.medicamento_info[0].administracion[0]}</TableCell>
-                  <TableCell align="right">{row.medicamento_info[0].nombre}</TableCell>
-                  <TableCell align="right">{row.medicamento_info[0].presentacion}</TableCell>
-                  <TableCell align="right">{row.cantidad_uso.cantidad}</TableCell>
-                  <TableCell align="right">{row.frecuencia_diaria_hr}</TableCell>
-                  <TableCell align="right">{`${row.tratamiento_tiempo.fecha_inicio} - ${row.tratamiento_tiempo.fecha_fin}`}</TableCell>
+                  <TableCell id='table-rows' align="left">{row.medicamento_info[0].administracion[0]}</TableCell>
+                  <TableCell id='table-rows' align="left">{row.medicamento_info[0].nombre}</TableCell>
+                  <TableCell id='table-rows' align="left">{row.medicamento_info[0].presentacion}</TableCell>
+                  <TableCell id='table-rows' align="left">{row.cantidad_uso.cantidad}</TableCell>
+                  <TableCell id='table-rows' align="left">{row.frecuencia_diaria_hr}</TableCell>
+                  <TableCell id='table-rows' align="left">{`${row.tratamiento_tiempo.fecha_inicio} - ${row.tratamiento_tiempo.fecha_fin}`}</TableCell>
                 </TableRow>
               ))
             )}
