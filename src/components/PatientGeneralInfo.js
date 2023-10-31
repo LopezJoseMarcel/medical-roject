@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import '../styles/PatientGeneraInfo.css'
 import Context from "../context/UserContext";
 

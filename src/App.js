@@ -10,7 +10,8 @@ import Header from './containers/Header';
 import FormData from './components/FormData'
 import { UserContextProvider } from './context/UserContext'
 import DiseasesTrain from './pages/DiseasesTrain';
-
+import Informes from './pages/Informes';
+import PacientePage from './pages/PacientePage';
 function App() {
  
  
@@ -27,6 +28,8 @@ function App() {
           <Route path='/info-patient' element={ <InfoPatient/> }/>
           <Route path='/form-data' element={ <FormData/> }/>
           <Route path='/disease-train' element={ <DiseasesTrain/> }/>
+          <Route path='/informes' element={ <Informes/> }/>
+          <Route path='/pacientes' element={ <PacientePage/> }/>
           </Routes>
       </UserContextProvider>
       

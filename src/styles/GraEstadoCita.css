@@ -1,0 +1,9 @@
+#grafico-cita{
+    width: 650px;
+    height: 450px;
+    background-color: #dff3ff;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

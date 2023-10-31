@@ -58,7 +58,10 @@ const Header = () => {
         <Link to="/disease-train">Entrenamiento de Modelos</Link>
       </li>
       <li>
-        <a href="/">Quienes somos</a>
+        <Link to="/informes">Informes</Link>
+      </li>
+      <li>
+        <Link to="/pacientes">Pacientes</Link>
       </li>
     </ul>
    </div>

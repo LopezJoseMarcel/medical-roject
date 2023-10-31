@@ -6,10 +6,11 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import updateCita from '../services/updateCita';
 import '../styles/PatientList.css';
 
 const PatientList = (props) => {
-  const [checked, setChecked] = useState([]);
+  //const [checked, setChecked] = useState([]);
   const [citas, setCitas] = useState(props.citas);
   const [selectedUser, setSelectedUser] = useState(null);
 
@@ -30,6 +31,8 @@ const PatientList = (props) => {
 
   const handleSend = () => {
     if (selectedUser) {
+      const response = updateCita(selectedUser.cita_id, {estado:"asistida"});
+      console.log(response);
       props.changeView('medicalConsultation', selectedUser);
     }
   };
@@ -53,6 +56,7 @@ const PatientList = (props) => {
                     value={cita._id}
                     onChange={handleChange}
                     checked={selectedUser && selectedUser.cita_id === cita._id}
+                    disabled = {cita.estado === 'asistida' ? true : false }
                   />
                 }
                 label={cita.full_name + " - " + cita.turno}

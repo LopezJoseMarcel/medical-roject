@@ -38,6 +38,7 @@ const fetchCitas = async () => {
 };
 
 // Llama a la función fetchCitas en el useEffect para obtener las citas cuando el componente se monte
+// eslint-disable-next-line react-hooks/exhaustive-deps
 useEffect(() => {
   fetchCitas();
 }, []);

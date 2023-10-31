@@ -1,0 +1,25 @@
+#super-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#first-row{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#second-row{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+label{
+    color:blueviolet;
+}
+.App{
+    display: flex;
+    align-items: initial;
+}

@@ -1,0 +1,87 @@
+
+#general-container{
+    display: flex;
+    flex-direction: row;
+    /* grid-gap: 10px; */
+    gap: 10px;
+    margin: 10px;
+    /* width: 100vh; */
+    height: 100vh;
+   /* background-color: aquamarine;*/
+}
+
+
+#filtros-container{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 5px;
+    border-radius: 14px;
+    width: 264px;
+    /*gap: 10px;*/
+    align-items: center;
+    height: max-content;
+}
+
+#panel-container{
+    display: flex;
+    flex-direction: column;
+    grid-gap: 8px;
+    gap: 8px;
+    width: 1030px;
+    /* height: 131px; */
+}
+
+#buscar-container{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+    background-color: white;
+    border-radius: 14px;
+ }
+
+#pacientes-container{
+    background-color: white;
+    padding: 15px;
+    border-radius: 14px;
+    height: fit-content;
+}
+
+.direccion-container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    gap: 14px;
+    padding: 10px;
+    border-radius: 14px;
+    background-color: #e1e1e1;
+}
+.edad-container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    gap: 14px;
+    padding: 10px;
+    border-radius: 14px;
+    background-color: #e1e1e1;
+}
+
+.enfermedad-container{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    gap: 14px;
+    padding: 10px;
+    border-radius: 14px;
+    background-color: #e1e1e1;
+    width: -webkit-fill-available;
+}
+
+.button-container{
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    gap: 8px;
+    align-items: center;
+}

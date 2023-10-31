@@ -24,7 +24,7 @@ const AppointmentPage = () => {
   const handleHorarioSeleccionado = (horario) => {
     setHorarioSeleccionado(horario);
   };
-
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const handleCrearCita = useCallback(async () => {
     if (fechaSeleccionada && horarioSeleccionado) {
       try {

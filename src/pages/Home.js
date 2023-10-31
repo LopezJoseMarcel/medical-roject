@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import Header from '../containers/Header';
 
 const Home = () => {

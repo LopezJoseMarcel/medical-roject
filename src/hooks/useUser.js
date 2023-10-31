@@ -45,6 +45,7 @@ export default function useUser() {
       setJwt(null)  
     },[setJwt])
 
+    console.log(userInfo);
 
     return {
         isLoggedIn: Boolean(jwt),

@@ -61,9 +61,9 @@ export default function DiseasesList() {
   }, [fetchEnfermedades]);
 
   // Handler para guardar
-  const handleGuardar = () => {
+ /* const handleGuardar = () => {
     fetchEnfermedades();
-  };
+  };*/
 
   const handleCloseDialog = () => {
     setShowDialog(false);
@@ -73,6 +73,7 @@ export default function DiseasesList() {
   // Handler para actualizar enfermedad entrenada
   const handleUpdateEnfer = () => {
     const res = updateEnfermedadService(selectedDisease._id, { enfermedad_entrenada: true });
+    console.log(res);
   };
 
   // Handler para entrenar

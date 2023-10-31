@@ -1,0 +1,5 @@
+#graficos-barras {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Dos gráficos por fila */
+    gap: 30px; /* Espacio entre los gráficos */
+  }

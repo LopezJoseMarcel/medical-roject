@@ -18,7 +18,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function EnfermedadComponent({ handleGuardar }) {
   const [open, setOpen] = React.useState(false);
 
-  const [enfermedades, setEnfermedades] = React.useState([])
+ const [enfermedades, setEnfermedades] = React.useState([])
 
   const fetchEnfermedadesInsert = async () => {
     try {

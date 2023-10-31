@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,18 +8,18 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import '../styles/DiseaseTreatment.css';
 import tratamientoEnfermedadService from '../services/tratamientoEnfermedadService';
-import Context from '../context/UserContext';
 
 
-export default function DiseaseTreatment() {
+
+export default function PatientInfoTreatment({user}) {
   const [tratamientos, setTratamientos] = useState([]);
-  const { userInfo } = useContext(Context);
+  
 // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const fetchTratamientos = async () => {
       try {
         // Obtener tratamientos desde el servicio
-        const promises = userInfo.tratamiento.map((id) => tratamientoEnfermedadService(id));
+        const promises = user.tratamiento.map((id) => tratamientoEnfermedadService(id));
         const data = await Promise.all(promises);
         setTratamientos(data);
         console.log(data);
