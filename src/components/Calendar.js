@@ -7,8 +7,13 @@ import { es } from 'date-fns/locale';
 import '../styles/Calendar.css';
 
 const Calendar = (props) => {
+
   const handleDateChange = (date) => {
-    props.onFechaSeleccionada(date);
+    if(date){
+      props.onFechaSeleccionada(date);
+      console.log(date);
+    }
+    
   };
 
   return (

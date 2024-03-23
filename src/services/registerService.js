@@ -7,7 +7,10 @@ export default function registerService({ nombre, apellido, email, contrasenha }
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ nombre, apellido, email, contrasenha, rol: "paciente" }),
+    body: JSON.stringify({ nombre, apellido, email, contrasenha,
+    rol: "paciente", historial_tratamientos: [],
+    historial_enfermedades:[]
+    }),
   })
     .then(response => {
       if (response.ok) {

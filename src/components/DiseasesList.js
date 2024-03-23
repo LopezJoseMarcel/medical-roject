@@ -60,10 +60,7 @@ export default function DiseasesList() {
     fetchEnfermedades();
   }, [fetchEnfermedades]);
 
-  // Handler para guardar
- /* const handleGuardar = () => {
-    fetchEnfermedades();
-  };*/
+
 
   const handleCloseDialog = () => {
     setShowDialog(false);
@@ -110,7 +107,7 @@ export default function DiseasesList() {
           setSuccess(true);
         } else {
           setMensaje('es insuficiente para realizar el entrenamiento');
-          setDisabled(false); // true
+          setDisabled(true); // true
           setSuccess(true);
         }
         const data = Object.keys(res).map((categoria) => ({

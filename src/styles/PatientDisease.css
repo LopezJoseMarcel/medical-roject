@@ -9,7 +9,7 @@ ul {
     background: white;
     padding: 14px;
     border-radius: 10px;
-    align-self: flex-start;
+   height: fit-content;
     margin-top: 8px;
   }
   

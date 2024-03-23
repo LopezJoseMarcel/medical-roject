@@ -4,7 +4,7 @@ import contarEnferCiudad from '../utils/contarEnferCiudad';
 import BarChartCiudad from './BarChartCiudad';
 import '../styles/GraEnfermedadEntre.css'
 
-const GraEnfermedadEntre = () => {
+const GraEnferCiudad = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -30,11 +30,13 @@ const GraEnfermedadEntre = () => {
       <label>Enfermedades por Ciudad</label>
       <div id="graficos-barras">
         {data.map((ciudadData, index) => (
-          <BarChartCiudad key={index} ciudadData={ciudadData} />
+          <BarChartCiudad key={index} ciudadData={ciudadData}
+           
+          />
         ))}
       </div>
     </div>
   );
 };
 
-export default GraEnfermedadEntre;
+export default GraEnferCiudad;

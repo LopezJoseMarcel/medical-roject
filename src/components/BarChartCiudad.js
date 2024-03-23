@@ -14,7 +14,8 @@ const BarChartCiudad = ({ ciudadData }) => {
     <div>
       <h3>{ciudadData.ciudad}</h3>
       <PieChart width={400} height={300}>
-        <Pie dataKey="value" data={data} cx={200} cy={150} outerRadius={80} fill="#8884d8" label>
+        <Pie  label={({ value, percent }) => `${value} (${Math.round(percent * 100)}%)`} 
+          dataKey="value" data={data} cx={200} cy={150} outerRadius={80} fill="#8884d8" >
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
           ))}

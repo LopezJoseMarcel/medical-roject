@@ -2,7 +2,8 @@ import React from "react";
 import GraEstadoCita from '../components/GraEstadoCita';
 import GraConsultas from "../components/GraConsultas";
 import GraConsultaEnfermedad from "../components/GraConsultaEnfermedad";
-import GraEnfermedadEntre from "../components/GraEnfermedadEntre";
+import GraEnferCiudad from "../components/GraEnferCiudad";
+import GraEnferMes from "../components/GraEnferMes";
 
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
@@ -61,7 +62,8 @@ export default function Informes() {
           <Tab label="Citas" {...a11yProps(0)} />
           <Tab label="Consultas por enfermedad" {...a11yProps(1)} />
           <Tab label="Consultas por mes/año" {...a11yProps(2)} />
-          <Tab label="Enfermedades entrenadas" {...a11yProps(3)} />
+          <Tab label="Enfermedades por ciudad" {...a11yProps(3)} />
+          <Tab label="Enfermedades por período de tiempo " {...a11yProps(4)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
@@ -74,7 +76,10 @@ export default function Informes() {
         <GraConsultas/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={3}>
-        <GraEnfermedadEntre/>
+        <GraEnferCiudad/>
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={4}>
+        <GraEnferMes/>
       </CustomTabPanel>
     </Box>
   );

@@ -1,5 +1,7 @@
 import React from "react";
 //-start
+import RecetaRecetario from '../components/RecetaRecetario';
+
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -9,7 +11,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import medicalModelService from '../services/medicalModelService';
 import "../styles/ModelComponent.css"
 //-end start
-import { addDays, format } from "date-fns";
+import { addDays, format, set } from "date-fns";
 import { useState, useEffect } from "react";
 import '../styles/MedicalConsultation.css';
 import TextField from '@mui/material/TextField';
@@ -17,6 +19,8 @@ import Autocomplete from '@mui/material/Autocomplete';
 import allEnferService from "../services/allEnferService";
 import allMediService from "../services/allMediService";
 import EnfermedadComponent from "./EnfermedadComponent";
+import MedicamentoInsertComponent from "./MedicamentoInsertComponent";
+
 import createConsultaService from "../services/createConsultaService";
 import { Box, CircularProgress } from "@mui/material";
 import Alert from '@mui/material/Alert';
@@ -48,6 +52,9 @@ import calcularEdad from '../utils/calcularEdad';
 import guardarModelInfo from "../utils/guardarModelInfo";
 //fin model info
 
+import updateCita from '../services/updateCita';
+
+
 const unidades = [
   "gota(gt)", "microgota(mgota)","litro(L)",
   "mililitro(mL)", "microlitro(µL)", "centímetro cúbico(cc/cm³)" ,
@@ -67,10 +74,15 @@ const lesionUbi = lesionesAll.lesionUbi1;
 
 
 
-const MedicalConsultation = ({selectedUser}) => {
+const MedicalConsultation = ({selectedUser, resetPage, setShowCalendar}) => {
+
+  //seccion de validacion de tratamiento
+  const [saveTraFinalDisabled, setSaveTraFinalDisabled] = useState(true);
+  const [saveTraPresuDisabled, setSaveTraPresuDisabled] = useState(true);
 
   
 
+  //
 
   const [usuarioEsSeleccionado, setusuarioEsSeleccionado] = useState(false);
   
@@ -105,6 +117,8 @@ const MedicalConsultation = ({selectedUser}) => {
   const [enfermedadIdFinal, setEnfermedadIdFinal] = useState(null);
 
   //end tratamiento 
+  
+ 
 
   //Handlers tratamientos
     // Funciones para manejar los cambios en los campos de los acordeones
@@ -115,6 +129,20 @@ const MedicalConsultation = ({selectedUser}) => {
 
   const handleCantidad1Change = (event) => {
     setCantidad1(event.target.value);
+
+    //validacion
+    if (medicamento1 && event.target.value) {
+            
+      if ( event.target.value >= medicamento1.dosis_alert) {
+        setSaveTraPresuDisabled(true);
+        alert(`!! La dosis del medicamento ${medicamento1.nombre} es peligrosa.`)
+      }else{
+        setSaveTraPresuDisabled(false);
+      }
+
+     
+    }
+    //end validacion
   };
 
   const handleUnidad1Change = (event) => {
@@ -135,6 +163,20 @@ const MedicalConsultation = ({selectedUser}) => {
 
   const handleCantidad2Change = (event) => {
     setCantidad2(event.target.value);
+
+      //validacion
+      if (medicamento2 && event.target.value) {
+            
+        if ( event.target.value >= medicamento2.dosis_alert) {
+          setSaveTraFinalDisabled(true);
+          alert(`!! La dosis del medicamento ${medicamento2.nombre} es peligrosa.`)
+        }else{
+          setSaveTraFinalDisabled(false);
+        }
+
+
+      }
+      //end validacion
   };
 
   const handleUnidad2Change = (event) => {
@@ -170,12 +212,24 @@ const MedicalConsultation = ({selectedUser}) => {
     const[tratamientosDefinitivos, setTratamientosDefinitivos] = useState([]);
     const[tratamientosPresuntivos, setTratamientosPresuntivos] = useState([]);
     //en tratamiento para consulta
- 
+   
+    //ReectaRecetario
+    const [medicamentosSeleccionados, setMedicamentosSeleccionados] = useState([]);
+    const [showPrint, setShowPrint ] = useState(false);
+    //
+
+    
+
   // Función para realizar la solicitud POST
   const handleSubmitTratamientoPresuntivo = async () => {
     try {
       setTratLoading1(true);
       // Construir el objeto de tratamiento con los datos del formulario
+
+     
+
+      console.log('medicamento1._id');
+      console.log(medicamento1._id);
       const tratamiento1 = {
         medicamento_id: medicamento1._id,
         cantidad_uso: {
@@ -188,8 +242,24 @@ const MedicalConsultation = ({selectedUser}) => {
           fecha_fin: format(addDays(fechaActual,duracion1),'yyyy-MM-dd') ,
         },
       };
+
+
       // Realizar la solicitud POST al servicio createTratamiento
       const response1 = await createTratamiento(tratamiento1).then((data) => {
+         //RecetaRecetario
+       setMedicamentosSeleccionados([...medicamentosSeleccionados,
+        {
+          _id: medicamento1._id,
+          administracion: medicamento1.administracion[0],
+          nombre: medicamento1.nombre,
+          presentacion: medicamento1.presentacion,
+          cantidad: cantidad1,
+          unidad: unidad1,
+          frecuencia: frecuencia1,
+          duracion: duracion1,
+        }
+      ]);
+        setShowPrint(true);
         setTratamientoIdPre(data._id);
         setTratamientosPresuntivos([...tratamientosPresuntivos, data._id])
         setConsultaData((prevData) => ({
@@ -199,8 +269,8 @@ const MedicalConsultation = ({selectedUser}) => {
             tratamiento_enfer_pre: data._id,
           }
         }));
+        //End Recetario
 
-     
 
         guardarModelInfo(
         selectededEnfermedadPresuntiva.numero_diccionario,
@@ -223,6 +293,28 @@ const MedicalConsultation = ({selectedUser}) => {
           // Manejar el error si ocurre
           console.error(error);
         });
+
+        guardarModelInfo(
+          selectededEnfermedadPresuntiva.numero_diccionario,
+          [[calcularEdad(usuario_data.fecha_nacimento),
+            usuario_data.genero === "masculino" ? 1 : 2,
+            selectededEnfermedadPresuntiva.numero_diccionario,
+            Number(lesionPrimariaModel),
+            Number(ubicacionModel)]],
+            [[
+              medicamento1.numero_diccionario,
+              Number(cantidad1),
+              Number(unidades.indexOf(unidad1) + Number(1)),
+              Number(frecuencia1),
+              Number(duracion1),
+            ]]
+          ).then((response) => {
+            // Manejar la respuesta del servidor si es necesario
+            console.log(response);
+          }).catch((error) => {
+            // Manejar el error si ocurre
+            console.error(error);
+          });
         
 
 
@@ -230,10 +322,6 @@ const MedicalConsultation = ({selectedUser}) => {
         setTratLoading1(false);
         limpiarTratamientosPresuntivo();
 
-        // Llama a guardarModelInfo aquí, pasando los argumentos necesarios
-
-
-      
         updateEnfermedadTratamiento(enfermedadIdPre,{id_tratamiento:data._id})
         .then((response) => {
           // Manejar la respuesta del servidor si es necesario
@@ -255,10 +343,10 @@ const MedicalConsultation = ({selectedUser}) => {
     }
   };
 
-  const 
-  handleSubmitTratamientoFinal = async () => {
-    try {
-      // Construir el objeto de tratamiento con los datos del formulario
+  const handleSubmitTratamientoFinal = async () => {
+    try {  
+     
+
       const tratamiento2 = {
         medicamento_id: medicamento2._id,
         cantidad_uso: {
@@ -271,8 +359,34 @@ const MedicalConsultation = ({selectedUser}) => {
           fecha_fin: format(addDays(fechaActual,duracion2),'yyyy-MM-dd') ,
         },
       };
+
       // Realizar la solicitud POST al servicio createTratamiento
       const response2 = await createTratamiento(tratamiento2).then((data) => {
+        //RecetaRecetario
+       setMedicamentosSeleccionados([...medicamentosSeleccionados,
+        {
+          _id: medicamento2._id,
+          administracion: medicamento2.administracion[0],
+          nombre: medicamento2.nombre,
+          presentacion: medicamento2.presentacion,
+          cantidad: cantidad2,
+          unidad: unidad2,
+          frecuencia: frecuencia2,
+          duracion: duracion2,
+        }
+      ]);
+        setShowPrint(true);
+        setTratamientoIdPre(data._id);
+        setTratamientosDefinitivos([...tratamientosDefinitivos, data._id])
+        setConsultaData((prevData) => ({
+          ...prevData,
+          tratamiento: {
+            ...prevData.tratamiento,
+            tratamiento_enfer_pre: data._id,
+          }
+        }));
+        //End Recetario
+      /*
         setTratamientoIdFinal(data._id);
         setTratamientosDefinitivos([...tratamientosDefinitivos, data._id]);
         setConsultaData((prevData) => ({
@@ -281,7 +395,7 @@ const MedicalConsultation = ({selectedUser}) => {
             ...prevData.tratamiento,
             tratamiento_enfer_final: data._id,
           }
-        }));
+        }));*/
 
         guardarModelInfo(
           selectededEnfermedadFinal.numero_diccionario,
@@ -323,9 +437,8 @@ const MedicalConsultation = ({selectedUser}) => {
         setTratLoading2(false);
       });
     console.log(response2);
-  
-      // Limpiar el formulario o realizar alguna acción adicional después de enviar los tratamientos
-  
+   
+    
     } catch (error) {
       // Manejar el error de la solicitud si es necesario
       console.log(error);
@@ -404,6 +517,8 @@ const handleAccordion2Change = (event, isExpanded) => {
  
   const handleGuardarCon = async () => {
     try {
+      const upadateUserCita = updateCita(selectedUser.cita_id, {estado:"asistida"});
+      console.log(upadateUserCita);
       setLoading(true);
       const { usuario_id, cita_id } = selectedUser;
       const response = await createConsultaService({
@@ -427,6 +542,7 @@ const handleAccordion2Change = (event, isExpanded) => {
         setLoading(false);
         setSucces(true);
         setError(false);
+        setDisabledGuardar(true);
       })
         .catch(err => {
         console.log(err);
@@ -492,6 +608,10 @@ const handleAccordion2Change = (event, isExpanded) => {
 
   const handleGuardar  = () => {
     fetchEnfermedades();
+  };
+
+  const handleGuardarMediComponent  = () => {
+    fetchMedicamentos();
   };
 //
   const [selectededEnfermedadFinal, setSelectededEnfermedadFinal] = useState(null);
@@ -620,7 +740,8 @@ const handleAccordion2Change = (event, isExpanded) => {
   const [selectedDataObjectFinal, setSelectedDataObjectFinal] = useState({}); // Valores en forma de objetos
   //const outputsValues = [1, 2, 3];
   const [disabledFinal, setDisabledFinal] = useState(true);
-  
+  //
+  const [disabledGuardar, setDisabledGuardar] = useState(false)
 
   const handleClickOpenFinal = () => {
     setOpenFinal(true);
@@ -682,10 +803,6 @@ const handleAccordion2Change = (event, isExpanded) => {
     handleClose();
   };
 
-  //Fin Mole Final
-
-
-
     return(
         <div className="clinic-container">
 
@@ -700,7 +817,6 @@ const handleAccordion2Change = (event, isExpanded) => {
                 <div className="">
                     <label  htmlFor="motivo">Motivo de consulta:</label>
                     <input id="motivo" className="motivo" type="text" onChange={handleMotivoConsultaChange}/>
-                    <button className="boton-cabecera" >ver mas información del paciente</button>
                 </div>
                 
                 
@@ -721,7 +837,7 @@ const handleAccordion2Change = (event, isExpanded) => {
                         name="piel.turgencia" 
                         onChange={handleExamenFisicoChange}
                     />
-                    <label >Lesiones:</label>
+                    
 
                     <div className="lesiones-container">
                       <Stack  spacing={3} sx={{ width: 500 }}>
@@ -744,7 +860,6 @@ const handleAccordion2Change = (event, isExpanded) => {
                         />
 
                         <Autocomplete
-                          multiple
                           id="tags-standard2"
                           options={lesionesSecu.map(item => item)}
                           getOptionLabel={(option) => option}
@@ -816,10 +931,10 @@ const handleAccordion2Change = (event, isExpanded) => {
                 </div>
         
                 <div className="diagnostico-container">
-                <h3>Diagnostico:</h3>
+                <h3>Diagnóstico:</h3>
                 <div id="autocomplete-container">
                   <div className="diagnostico-presuntivo-container">
-                    <label >Diagnostico Presuntivo</label>
+                    <label >Diagnóstico Presuntivo</label>
                     <Autocomplete
                       disablePortal
                       id="combo-DiagnosticoPresuntivo"
@@ -832,7 +947,7 @@ const handleAccordion2Change = (event, isExpanded) => {
                 </div>
         
                 <div className="diagnostico-definitivo-container">
-                    <label>Diagnostico Definitivo</label>
+                    <label>Diagnóstico Definitivo</label>
                     <Autocomplete
                       disablePortal
                       id="combo-diagnosticoDefinitivo"
@@ -846,6 +961,9 @@ const handleAccordion2Change = (event, isExpanded) => {
                 </div>
                 <div id="container-enfermedadComponent">
                   <EnfermedadComponent handleGuardar={handleGuardar}/>
+                </div>
+                <div>
+                  <MedicamentoInsertComponent handleGuardar={handleGuardarMediComponent}/>
                 </div>
                 </div>
         
@@ -945,7 +1063,7 @@ const handleAccordion2Change = (event, isExpanded) => {
                               aria-describedby="alert-dialog-description"
                             >
                               <DialogTitle id="alert-dialog-title">
-                                {"Predicción de la enfermedad x"}
+                                {"Predicción de la enfermedad"}
                               </DialogTitle>
                               <DialogContent>
                                 <Button variant="outlined" onClick={fetchPredictions}> 
@@ -992,7 +1110,7 @@ const handleAccordion2Change = (event, isExpanded) => {
                          
                           
                         </div>
-                        <Button onClick={handleSubmitTratamientoPresuntivo}>Guardar</Button>
+                        <Button disabled={saveTraPresuDisabled} onClick={handleSubmitTratamientoPresuntivo}>Guardar</Button>
                       </div>
                       <div>
                         {tratLoading1 && 
@@ -1155,7 +1273,7 @@ const handleAccordion2Change = (event, isExpanded) => {
                            )
                             
                           }
-                        <Button onClick={handleSubmitTratamientoFinal}>Guardar</Button>
+                        <Button disabled={saveTraFinalDisabled} onClick={handleSubmitTratamientoFinal}>Guardar</Button>
                       </div>
                       <div>
                         {tratLoading2 && 
@@ -1190,11 +1308,23 @@ const handleAccordion2Change = (event, isExpanded) => {
                 </div>
 
 
-                  <button className="anhadir">Añadir tratamiento</button>
+                  
                 <div className="opciones">
-                    <button onClick={handleGuardarCon}>Guardar</button>
-                    <button>Limpiar</button>
-                    <button>Cancelar</button>
+                    <button disabled={disabledGuardar} onClick={handleGuardarCon}>Guardar</button>
+                    <button onClick={() => 
+                    { resetPage();
+                      setShowCalendar(true);
+                    }}>Volver a inicio</button>
+                    <button disabled={disabledGuardar} onClick={() => 
+                    { resetPage();
+                      setShowCalendar(true);
+                    }}>Cancelar</button>
+
+                    { showPrint  &&
+                      <RecetaRecetario medicamentosArray={medicamentosSeleccionados}/>
+                    }
+                    
+                   
                 </div>
              <div>
                {loading && 

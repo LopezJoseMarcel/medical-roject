@@ -28,7 +28,7 @@ export default function GraConsultas() {
           <BarChart width={500} height={250} data={data}>
             <XAxis dataKey={(entry) => `${entry.año} ${entry.mes}`} 
             tick={{ fontSize: 10 }}/>
-            <YAxis allowDecimals={false} />
+            <YAxis label={{ value: 'Cantidad', angle: -90, position: 'insideLeft' }} allowDecimals={false} />
             <Tooltip />
             <Bar dataKey="cantidad" fill="#8884d8" />
           </BarChart>

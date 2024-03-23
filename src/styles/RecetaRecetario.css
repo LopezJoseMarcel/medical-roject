@@ -1,0 +1,62 @@
+#main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: white;
+    margin-left: 120px;
+    margin-top: 104px;
+  }
+  .cabacera{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+    border-bottom: solid grey;
+    width: -webkit-fill-available;
+    padding: 10px;
+  }
+  .logoDR{
+    width: 50px;
+    height: 50px;
+  }
+  .titulo{
+    color: rgb(109, 118, 238);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+  .receta{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    width:400px;
+    height: 450px;
+    padding: 20px;
+    border: solid grey;
+  }
+  .info{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+  
+  .parrafo{
+    color: black;
+  }
+
+  #fecha1 {
+    color: black;
+  }
+
+  #fecha2{
+    color: black;
+  }
+
+#fecha1{
+  position: absolute;
+    top: 571px;
+    left: 470px;
+}
+
+#fecha2{
+  position: absolute;
+  left: 470px;
+  top: 1077px;
+}

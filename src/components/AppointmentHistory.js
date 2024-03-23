@@ -11,6 +11,9 @@ import '../styles/AppoitmentHistory.css';
 import lastCita from '../services/lastCita';
 import Context from '../context/UserContext'
 
+import { responsiveFontSizes, ThemeProvider, createTheme } from '@mui/material/styles';
+
+
 
 
 export default function AppointmentHistory() {
@@ -24,7 +27,7 @@ function createData(id,dia,fecha, turno,estado) {
 }
 
 const rows = citas.map((cita,index) =>
-  createData(index + 1,new Date(cita.fecha).toLocaleDateString("es-ES", { weekday: "long" }),cita.fecha.slice(0, cita.fecha.indexOf("T")), cita.turno, cita.disease)
+  createData(index + 1,new Date(cita.fecha).toLocaleDateString("es-ES", { weekday: "long" }),cita.fecha, cita.turno, cita.disease)
 );
 
 //fetch cita
@@ -43,13 +46,17 @@ useEffect(() => {
   fetchCitas();
 }, []);
 
+ // Tema MUI con tamaño de fuente receptivo
+ const theme = responsiveFontSizes(createTheme());
+
 return (
+  <ThemeProvider theme={theme}>
   <TableContainer className='table' component={Paper}>
-    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <Table  sx={{ minWidth: 300 }} size='small' aria-label="simple table">
       <TableHead>
         <TableRow>
-          <TableCell>id</TableCell>
-          <TableCell align="right">Dia</TableCell>
+         
+          <TableCell align="right">Día</TableCell>
           <TableCell align="right">Fecha de cita</TableCell>
           <TableCell align="right">Horario</TableCell>
           <TableCell align="right">Estado</TableCell>
@@ -61,9 +68,7 @@ return (
             key={row.id}
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
           >
-            <TableCell component="th" scope="row">
-              {row.id}
-            </TableCell>
+            
             <TableCell align="right">{row.dia}</TableCell>
             <TableCell align="right">{row.fecha}</TableCell>
             <TableCell align="right">{row.turno}</TableCell>
@@ -73,6 +78,7 @@ return (
       </TableBody>
     </Table>
   </TableContainer>
+  </ThemeProvider>
 );
 
 }

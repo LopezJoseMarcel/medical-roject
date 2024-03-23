@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
-import '../styles/Loging.css';
+import '../styles/Login.css';
 import useUser from "../hooks/useUser";
 import { Box, CircularProgress } from "@mui/material";
 
@@ -45,7 +45,7 @@ const Login = (props) => {
 
           <label htmlFor="input-contrasenha" >Contraseña</label>
           <input value={contrasenha} name="contrasenha" id="input-contrasenha" 
-            type="contrasenha" placeholder=""
+            type="password" placeholder=""
             onChange={(e) => setcontrasenha(e.target.value)}
           />
           <button  type="submit" className="button-form">Iniciar</button>

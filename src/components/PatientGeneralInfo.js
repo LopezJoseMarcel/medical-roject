@@ -20,7 +20,7 @@ const PatientGeneralInfo = () => {
             <div className="info">
               <label htmlFor="phone-number">Número de teléfono:</label>
               <input disabled defaultValue={Number(userInfo?.movil)} className="phone-number" id="phone-number" type="number"/>
-              <label htmlFor="ci">Número de Cedula:</label>
+              <label htmlFor="ci">Número de Cédula:</label>
               <input disabled defaultValue={Number(userInfo?.cedula) } className="ci" id="ci" type="number"/>
               <label htmlFor="birth-date">Fecha de nacimiento:</label>
               <input disabled defaultValue={userInfo?.fecha_nacimento} className="birth-date" id="birth-date" type="text" />

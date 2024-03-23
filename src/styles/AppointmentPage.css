@@ -16,6 +16,7 @@ body {
     display: flex;
     flex-direction: row;
     gap: 10px;
+    justify-content: center;
   }
 
   .first-column {
@@ -31,4 +32,15 @@ body {
 
   #selection-title{
     color: white;
+  }
+
+  @media (max-width: 640px) {
+    .main-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+     
+    }
   }

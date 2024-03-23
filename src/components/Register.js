@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../styles/Loging.css';
+import '../styles/Login.css';
 import registerService from "../services/registerService";
 import { Box, CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom"
@@ -13,6 +13,7 @@ const Register = (props) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [passwordError, setPasswordError] = useState('');
   const navigate = useNavigate();
 
   const handleNavigate = (e) => {
@@ -20,15 +21,28 @@ const Register = (props) => {
     navigate("/form-data",{ state: { email: email, nombre: nombre, apellido: apellido} })
   }
 
-  /*useEffect(() => {
-    if (success) {
-      props.onFormSwitch('login');
+  const validatePassword = (password) => {
+    // Expresión regular para validar la contraseña
+    const passwordPattern = /^[A-Za-z0-9]{8,}$/;
+
+    if (!passwordPattern.test(password)) {
+      setPasswordError('La contraseña debe tener al menos 8 caracteres y solo puede contener letras y números.');
+      return false;
+    } else {
+      setPasswordError('');
+      return true;
     }
-  }, [success, props]);*/
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
+  //  validatePassword(e.target.value);
+    // Validar la contraseña antes de enviarla
+    if (!validatePassword(contrasenha)) {
+      setLoading(false);
+      return;
+    }
   
     registerService({
       nombre,
@@ -62,13 +76,20 @@ const Register = (props) => {
       <>
         <form className="register-form" onSubmit={handleSubmit}>
           <label htmlFor="input-name">Nombre</label>
-          <input value={nombre} name="name" type="text" id="input-name" onChange={(e) => {setName(e.target.value)}} placeholder="Nombre completo" />
+          <input required value={nombre} name="name" type="text" id="input-name" onChange={(e) => {setName(e.target.value)}} placeholder="Nombre completo" />
           <label htmlFor="input-apellido">Apellido</label>
-          <input value={apellido} name="apellido" type="text" id="input-apellido" onChange={(e) => {setApellido(e.target.value)}} placeholder="Apellido" />
+          <input required value={apellido} name="apellido" type="text" id="input-apellido" onChange={(e) => {setApellido(e.target.value)}} placeholder="Apellido" />
           <label htmlFor="register-input-email" >Correo</label>
-          <input value={email} name="email" type="email" id="register-input-email" placeholder="tucorreo@gmail.com" onChange={(e) => setEmail(e.target.value)} />
+          <input required value={email} name="email" type="email" id="register-input-email" placeholder="tucorreo@gmail.com" onChange={(e) => setEmail(e.target.value)} />
           <label htmlFor="register-input-password" >Contraseña</label>
-          <input value={contrasenha} name="password" id="register-input-password" type="password" placeholder="mas de ocho caracteres, sin simbolos" onChange={(e) => setPassword(e.target.value)} />
+          <input required value={contrasenha} name="password" id="register-input-password" 
+            type="password" placeholder="mas de ocho caracteres, sin simbolos" 
+            onChange={(e) => {
+              setPassword(e.target.value);
+              // Validar la contraseña al escribir
+              
+            }} />
+            {passwordError && <p className="error-message">{passwordError}</p>}
           <button type="submit" className="button-form">Crear</button>
         </form>
         <button className="link-btn" onClick={() => props.onFormSwitch('login')}> Ya tengo una cuenta? Inicie sesion aqui. </button>

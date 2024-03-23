@@ -1,0 +1,83 @@
+[
+    [
+        {
+            "_id": "653977caebe83a9d63fed663",
+            "medicamento_id": "64ee80fcbe4ca326b0ad8852",
+            "cantidad_uso": {
+                "cantidad": 2,
+                "unidad": "gramo(g)",
+                "_id": "653977caebe83a9d63fed664"
+            },
+            "frecuencia_diaria_hr": "24 horas",
+            "tratamiento_tiempo": {
+                "fecha_inicio": "2023-10-25",
+                "fecha_fin": "2023-11-19",
+                "_id": "653977caebe83a9d63fed665"
+            },
+            "__v": 0,
+            "medicamento_info": [
+                {
+                    "_id": "64ee80fcbe4ca326b0ad8852",
+                    "nombre": "Metronidazol 0,75% crema",
+                    "presentacion": "crema",
+                    "descripcion": "La crema de Metronidazol 0,75% es un medicamento tópico utilizado para tratar infecciones bacterianas y parasitarias de la piel. El metronidazol actúa matando o deteniendo el crecimiento de ciertos microorganismos que causan infecciones cutáneas.",
+                    "usos": [
+                        "Tratamiento de infecciones bacterianas en la piel, como el acné rosácea",
+                        "Control de ciertas infecciones parasitarias cutáneas"
+                    ],
+                    "efectos_secundarios": [
+                        "Irritación de la piel",
+                        "Enrojecimiento",
+                        "Sequedad o descamación de la piel",
+                        "Sensación de ardor o picazón en el área de aplicación"
+                    ],
+                    "administracion": [
+                        "aplicar sobre la piel"
+                    ],
+                    "numero_diccionario": 10
+                }
+            ]
+        }
+    ],
+    [
+        {
+            "_id": "653977d6ebe83a9d63fed66a",
+            "medicamento_id": "64ee82b0be4ca326b0ad8854",
+            "cantidad_uso": {
+                "cantidad": 2,
+                "unidad": "gramo(g)",
+                "_id": "653977d6ebe83a9d63fed66b"
+            },
+            "frecuencia_diaria_hr": "24 horas",
+            "tratamiento_tiempo": {
+                "fecha_inicio": "2023-10-25",
+                "fecha_fin": "2023-11-22",
+                "_id": "653977d6ebe83a9d63fed66c"
+            },
+            "__v": 0,
+            "medicamento_info": [
+                {
+                    "_id": "64ee82b0be4ca326b0ad8854",
+                    "nombre": "Eritromicina crema",
+                    "presentacion": "crema",
+                    "descripcion": "La crema de Eritromicina es un medicamento tópico que contiene un antibiótico macrólido llamado eritromicina. Se utiliza para tratar infecciones bacterianas de la piel, como el acné, así como infecciones oculares y otras afecciones dermatológicas.",
+                    "usos": [
+                        "Tratamiento de infecciones bacterianas de la piel",
+                        "Control del acné",
+                        "Tratamiento de infecciones oculares"
+                    ],
+                    "efectos_secundarios": [
+                        "Enrojecimiento, ardor o irritación de la piel",
+                        "Piel seca o descamación",
+                        "Picazón",
+                        "Posible sensibilidad al sol"
+                    ],
+                    "administracion": [
+                        "aplicar sobre la piel"
+                    ],
+                    "numero_diccionario": 12
+                }
+            ]
+        }
+    ]
+]

@@ -12,7 +12,7 @@ import allCitas from '../services/allCitas';
 import contarCitas from '../utils/contarCitas';
 import '../styles/GraEstadoCita.css';
 
-const BarChartExample = () => {
+const GraEstadoCita = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ const BarChartExample = () => {
         <LineChart width={600} height={400} data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey={(entry) => `${entry.año} ${entry.mes.substring(0, 3)}`} tick={{ fontSize: 10 }} padding={{ left: 30, right: 30 }} />
-          <YAxis  allowDecimals={false}/>
+          <YAxis label={{ value: 'Cantidad', angle: -90, position: 'insideLeft' }} allowDecimals={false}/>
           <Tooltip />
           <Legend />
           <Line type="monotone" dataKey="asistidas" stroke="#8884d8" activeDot={{ r: 8 }} />
@@ -58,4 +58,4 @@ const BarChartExample = () => {
   );
 };
 
-export default BarChartExample;
+export default GraEstadoCita;

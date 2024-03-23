@@ -9,11 +9,12 @@ import citaFechaService from '../services/citaFechaService';
 
 const CalendarCon = (props) => {
   const [dateValue, setDateValue] = useState(new Date());
+  
 
   const handleAccept = async () => {
     try {
       const dateFormatted = format(dateValue, 'yyyy-MM-dd');
-      const data = await citaFechaService(dateFormatted + "T04:00:00.000Z");
+      const data = await citaFechaService(dateFormatted);
       props.setCitas(data);
       props.changeView('appointment');
     } catch (error) {

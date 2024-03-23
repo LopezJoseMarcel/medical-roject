@@ -6,7 +6,6 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import updateCita from '../services/updateCita';
 import '../styles/PatientList.css';
 
 const PatientList = (props) => {
@@ -31,8 +30,8 @@ const PatientList = (props) => {
 
   const handleSend = () => {
     if (selectedUser) {
-      const response = updateCita(selectedUser.cita_id, {estado:"asistida"});
-      console.log(response);
+      // Ocultar el componente CalendarCon
+      props.setShowCalendar(false);
       props.changeView('medicalConsultation', selectedUser);
     }
   };

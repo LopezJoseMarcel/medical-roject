@@ -22,7 +22,7 @@ const GraConsultaEnfermedad = () => {
 
   return (
     <div>
-      <label>Consultas por enfermedad</label>
+      <label> Cantidad de Consultas por Enfermedad</label>
       <div id='consulta-enfermedad'>
         <PieChart width={400} height={400}>
           <Pie
@@ -33,7 +33,7 @@ const GraConsultaEnfermedad = () => {
             cy="50%"
             outerRadius={80}
             fill="#8884d8"
-            label={({ cantidad, percent }) => `${cantidad} (${(percent * 100).toFixed(2)}%)`}
+            label={({ cantidad, percent }) => `${cantidad} (${Math.round(percent * 100)}%)`}
           >
             {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={generateRandomColor()} />

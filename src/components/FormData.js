@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../styles/FormData.css'
 import RadioGroup from "@mui/material/RadioGroup";
+import Button from "@mui/material/Button";
+
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import { useLocation } from 'react-router-dom';
@@ -19,9 +21,29 @@ const FormData = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [disabledButton, setDisabledButton] = useState(true);
   //location to recive the data from Register
   const location = useLocation();
   const  { email, nombre, apellido} = location.state;
+
+  //useEffect 
+
+  useEffect(() => {
+    // Verifica si todos los campos tienen valor
+    const allFieldsFilled = (
+      genero !== "" &&
+      movil !== "" &&
+      cedula !== "" &&
+      fecha_nacimento !== "" &&
+      calle !== "" &&
+      barrio !== "" &&
+      ciudad !== ""
+    );
+
+    // Habilita o deshabilita el botón según si todos los campos están llenos
+    setDisabledButton(!allFieldsFilled);
+  }, [genero, movil, cedula, fecha_nacimento, calle, barrio, ciudad]);
+
   //navigate
   const navigate = useNavigate();
 
@@ -87,6 +109,7 @@ const FormData = () => {
                 className="phone-number"
                 id="phone-number"
                 type="number"
+                placeholder="09## ### ###"
                 value={movil}
                 onChange={(e) => setPhoneNumber(e.target.value)}
               />
@@ -106,7 +129,7 @@ const FormData = () => {
                 value={fecha_nacimento}
                 onChange={(e) => setBirthDate(e.target.value)}
               />
-              <label htmlFor="gender">Género:</label>
+              <label htmlFor="gender">Género biológico:</label>
               <div id= "gender">
                 <RadioGroup
                   id="gender"
@@ -124,7 +147,7 @@ const FormData = () => {
                     control={<Radio />}
                     label="Femenino"
                   />
-                  <FormControlLabel value="otro" control={<Radio />} label="Otro" />
+                  
                 </RadioGroup>
               </div>
             </div>
@@ -155,7 +178,8 @@ const FormData = () => {
                 onChange={(e) => setCity(e.target.value)}
               />
             </div>
-            <button className="button-form" onClick={handleSubmit}>Aceptar</button>
+            <Button disabled={disabledButton} onClick={handleSubmit} variant="contained" >Aceptar</Button>
+            
           </div>
         </>  
       }
@@ -163,7 +187,7 @@ const FormData = () => {
       {success &&  
         <>
           <label>Usuario creado con exito, ahora ya podes iniciar sesion</label>
-          <button  type="button" className="button-form" onClick={handleNavigate}>Aceptar</button>
+          <button   type="button" className="button-form" onClick={handleNavigate}>Aceptar</button>
         </>
       }
     </div>

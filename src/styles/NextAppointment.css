@@ -33,3 +33,9 @@
     padding: 12px;
     border-radius: 14px;
   }
+
+  @media (max-width: 640px) {
+    #next-appointment{
+      width: fit-content;
+    }
+  }

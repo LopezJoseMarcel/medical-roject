@@ -41,7 +41,9 @@ const PacienteComponent = () => {
   //new state
   const [filtroCiudad, setFiltroCiudad] = useState('');
   const [filtroBarrio, setFiltroBarrio] = useState('');
-  const [filtroCalle, setFiltroCalle] = useState('');
+
+ 
+
   const [filtroEdadMayor, setFiltroEdadMayor] = useState('');
   const [filtroEdadMenor, setFiltroEdadMenor] = useState('');
   const [filtroEdadIgual, setFiltroEdadIgual] = useState('');
@@ -114,12 +116,7 @@ const PacienteComponent = () => {
       );
     }
 
-    // Filtrar por calle
-    if (filtroCalle) {
-      filteredUsers = filteredUsers.filter((user) =>
-        user.direccion.calle.toLowerCase().includes(filtroCalle.toLowerCase())
-      );
-    }
+    
 
     // Filtrar por edad mayor
     if (filtroEdadMayor) {
@@ -163,7 +160,6 @@ const PacienteComponent = () => {
     // Restablecer los estados de los campos de filtro
     setFiltroCiudad('');
     setFiltroBarrio('');
-    setFiltroCalle('');
     setFiltroEdadMayor('');
     setFiltroEdadMenor('');
     setFiltroEdadIgual('');
@@ -192,8 +188,7 @@ const PacienteComponent = () => {
            onChange={(e) => setFiltroCiudad(e.target.value)} />
           <TextField size='small' id="tf-barrio" label="Barrio" variant="outlined"  value={filtroBarrio}
            onChange={(e) => setFiltroBarrio(e.target.value)}/>
-          <TextField size='small' id="tf-calle" label="Calle" variant="outlined" value={filtroCalle}
-           onChange={(e) => setFiltroCalle(e.target.value)}/>
+          
         </div>
         <div className='edad-container'>
           <h5>Edad</h5>
